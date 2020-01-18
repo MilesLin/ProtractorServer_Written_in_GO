@@ -6,12 +6,12 @@ import (
 	"log"
 	"net/http"
 	"regexp"
+	"sort"
 	"strconv"
 	"strings"
 )
 
-type login struct {
-}
+type login struct{}
 
 func (lo login) registerRoutes() {
 
@@ -19,14 +19,17 @@ func (lo login) registerRoutes() {
 	http.HandleFunc("/api/login/currentIdentity", lo.GetCurrentIdentity)
 	http.HandleFunc("/api/login/logout", lo.Logout)
 	http.HandleFunc("/api/login/users/", lo.PutUser)
+	http.HandleFunc("/api/login/new", lo.NewUser)
 }
 
 func (lo login) login(w http.ResponseWriter, r *http.Request) {
 
-	var dbAct *model.Account
 
 	if r.Method == http.MethodPost {
+		var dbAct *model.Account
+
 		err := r.ParseForm()
+
 		if err != nil {
 			log.Println(err)
 		}
@@ -96,11 +99,37 @@ func (lo login) PutUser(w http.ResponseWriter, r *http.Request) {
 				}
 			}
 			w.WriteHeader(http.StatusOK)
-		}else{
+		} else {
 			http.NotFound(w, r)
 		}
 
 	} else {
 		http.NotFound(w, r)
 	}
+}
+
+func (lo login) NewUser(w http.ResponseWriter, r *http.Request) {
+	if r.Method == http.MethodPost {
+		sort.Slice(model.Accounts, accountSort)
+		maxId := model.Accounts[len(model.Accounts) - 1].Id
+
+		var body *model.Account
+		decoder := json.NewDecoder(r.Body)
+		_ = decoder.Decode(&body)
+
+		model.Accounts = append(model.Accounts, model.Account {
+			maxId+1,
+			body.FirstName,
+			body.LastName,
+			body.Username,
+			body.Password,
+		})
+	}else{
+		http.NotFound(w, r)
+	}
+
+}
+
+func accountSort(i int, j int) bool {
+	return model.Accounts[i].Id < model.Accounts[j].Id 
 }
