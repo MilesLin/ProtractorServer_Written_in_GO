@@ -1,7 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="a135165d-bcbd-4ecd-924d-d4ee5b63181f" name="Default Changelist" comment="" />
+    <list default="true" id="a135165d-bcbd-4ecd-924d-d4ee5b63181f" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/controller.go" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/controller/login.go" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/go.mod" beforeDir="false" afterPath="$PROJECT_DIR$/go.mod" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/main.go" beforeDir="false" afterPath="$PROJECT_DIR$/main.go" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -15,10 +22,16 @@
     </option>
   </component>
   <component name="GOROOT" path="C:\Go" />
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
   <component name="GoLibraries">
     <option name="indexEntireGoPath" value="false" />
   </component>
   <component name="ProjectId" id="1WYixARmjmgmmeFqJKQvb1D0wkg" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showExcludedFiles" value="true" />
@@ -27,6 +40,7 @@
   <component name="PropertiesComponent">
     <property name="DefaultGoTemplateProperty" value="Go File" />
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="go.import.settings.migrated" value="true" />
     <property name="last_opened_file_path" value="$USER_HOME$" />
@@ -75,5 +89,23 @@
   <component name="VgoProject">
     <integration-enabled>true</integration-enabled>
     <proxy>direct</proxy>
+  </component>
+  <component name="WindowStateProjectService">
+    <state width="914" height="179" key="GridCell.Tab.0.bottom" timestamp="1579336479928">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="914" height="179" key="GridCell.Tab.0.bottom/-1366.-7.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1579336479928" />
+    <state width="914" height="179" key="GridCell.Tab.0.center" timestamp="1579336479928">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="914" height="179" key="GridCell.Tab.0.center/-1366.-7.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1579336479928" />
+    <state width="914" height="179" key="GridCell.Tab.0.left" timestamp="1579336479927">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="914" height="179" key="GridCell.Tab.0.left/-1366.-7.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1579336479927" />
+    <state width="914" height="179" key="GridCell.Tab.0.right" timestamp="1579336479928">
+      <screen x="0" y="0" width="1920" height="1040" />
+    </state>
+    <state width="914" height="179" key="GridCell.Tab.0.right/-1366.-7.1366.728/0.0.1920.1040@0.0.1920.1040" timestamp="1579336479928" />
   </component>
 </project>
