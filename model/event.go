@@ -24,9 +24,9 @@ type Session struct {
 	Name      string   `json:"name"`
 	Presenter string   `json:"presenter"`
 	Duration  int      `json:"duration"`
-	Level1    *bool    `json:"level1"`
-	Level2    *bool    `json:"level2"`
-	Level3    *bool    `json:"level3"`
+	Level1    bool    `json:"level1"`
+	Level2    bool    `json:"level2"`
+	Level3    bool    `json:"level3"`
 	Period    string   `json:"period"`
 	Abstract  string   `json:"abstract"`
 	Voters    []string `json:"voters"`
@@ -51,19 +51,19 @@ var MyEvents []Event = []Event{
 		},
 		Session: &[]Session{
 			{1, 1, "Angular 基礎觀念", "黃耀文",
-				2, &yes, &no, &no, "上午場",
+				2, yes, no, no, "上午場",
 				"想當年，AngularJS 的出現，帶給大家的是一次又一次的驚喜，但這高潮迭起的學習曲線，著實讓人又愛又恨。大家也見識過 React 的絢麗登場，效能優異的 VDOM 技術霎時震攝了不少前端攻城獅，不過能力越強，責任也就越大，隨之而來的便是架構上的混亂與不知所措。",
 				[]string{
 					"bradgreen", "igorminar",
 				}},
 			{1, 2, "Angular 實戰開發", "呂志明",
-				2, &yes, &no, &no, "上午場",
+				2, yes, no, no, "上午場",
 				"現在，Angular 7 的到來，不但挾帶強大的架構優勢與全新的元件化技術降低學習門檻，優異的 TypeScript 與各式開發工具的火力支援更是如虎添翼，如果再算上國內外龐大的社群基礎，可預見的將在這前端世界掀起一場絢麗戰火。",
 				[]string{
 					"bradgreen", "igorminar", "johnpapa",
 				}},
 			{1, 3, "Angular 實驗室", "黃耀文",
-				3, &no, &yes, &no, "下午場",
+				3, no, yes, no, "下午場",
 				"本次課程包含一堂 2 小時的線上課程與一天 7 小時的實體課程，過程中將帶領大家快速上手 Angular 網站開發框架，課程中也會提及部分ES6/TypeScript的重要特性與觀念，更會在課後提供進一步的 Angular 補充教材（免費），相信可以帶領大家在最短時間內掌握Angular 開發密技。",
 				[]string{
 					"bradgreen", "igorminar",
@@ -85,12 +85,12 @@ var MyEvents []Event = []Event{
 		},
 		Session: &[]Session{
 			{1, 1, "資料模型開發實務", "Will 保哥",
-				3, &yes, &no, &no, "上午場",
+				3, yes, no, no, "上午場",
 				"企業多年以來建置 Web-based 系統大多採用 ASP.NET Web Form 為主要開發技術，無論企業官網或內部系統，都使用同一套技術，並採用元件化的控制項架構，進而簡化開發時間，加速開發流程。而資料存取的部分，也大多採用預存程序或傳統 ADO.NET 作為主要資料存取方法。但是，微軟近幾年推出許多嶄新的開發技術，就是用來解決原本技術的不便之處，為企業帶來不一樣的選擇。但礙於學習新技術總有一些學習成本，短時間不容易學會，也不知道使用這些新技術是否能帶來開發效率的提升，這些問題，都將在本次課程為您一一解答。",
 				[]string{},
 			},
 			{1, 2, "進階開發實務 I", "Will 保哥",
-				4, &no, &no, &yes, "上午場",
+				4, no, no, yes, "上午場",
 				"本次課程，將鉅細靡遺的解說 ASP.NET MVC 框架必須了解的觀念與技術 (包含最新 ASP.NET MVC 5 新增功能)，其課程範圍包括 Visual Studio 開發工具操作技巧 (Visual Studio 2017)、ASP.NET MVC 架構與觀念解析、資料模型開發實務、控制器相關技術開發實務、檢視頁面相關技術實務、進階開發實務 (AJAX, Bundle, 分頁, 資安, ...)，以及每周都會指派作業，讓各位學員能有完整的練習，課程定位從入門到進階，內容豐富且紮實。",
 				[]string{},
 			},

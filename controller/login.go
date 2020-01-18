@@ -24,7 +24,6 @@ func (lo login) registerRoutes() {
 
 func (lo login) login(w http.ResponseWriter, r *http.Request) {
 
-
 	if r.Method == http.MethodPost {
 		var dbAct *model.Account
 
@@ -111,25 +110,25 @@ func (lo login) PutUser(w http.ResponseWriter, r *http.Request) {
 func (lo login) NewUser(w http.ResponseWriter, r *http.Request) {
 	if r.Method == http.MethodPost {
 		sort.Slice(model.Accounts, accountSort)
-		maxId := model.Accounts[len(model.Accounts) - 1].Id
+		maxId := model.Accounts[len(model.Accounts)-1].Id
 
 		var body *model.Account
 		decoder := json.NewDecoder(r.Body)
 		_ = decoder.Decode(&body)
 
-		model.Accounts = append(model.Accounts, model.Account {
-			maxId+1,
+		model.Accounts = append(model.Accounts, model.Account{
+			maxId + 1,
 			body.FirstName,
 			body.LastName,
 			body.Username,
 			body.Password,
 		})
-	}else{
+	} else {
 		http.NotFound(w, r)
 	}
 
 }
 
 func accountSort(i int, j int) bool {
-	return model.Accounts[i].Id < model.Accounts[j].Id 
+	return model.Accounts[i].Id < model.Accounts[j].Id
 }
