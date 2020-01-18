@@ -12,6 +12,7 @@ type login struct {
 }
 
 func (lo login) registerRoutes() {
+
 	http.HandleFunc("/api/login", lo.login)
 	http.HandleFunc("/api/login/currentIdentity", lo.GetCurrentIdentity)
 }
@@ -45,6 +46,7 @@ func (lo login) login(w http.ResponseWriter, r *http.Request) {
 		if dbAct == nil {
 			w.WriteHeader(http.StatusUnauthorized)
 		} else {
+			model.CurrentIdentity = dbAct
 			w.Header().Add("Content-Type", "application/json")
 			result, _ := json.Marshal(dbAct)
 			w.Write(result)
@@ -56,6 +58,12 @@ func (lo login) login(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func (lo login) GetCurrentIdentity(writer http.ResponseWriter, request *http.Request) {
-
+func (lo login) GetCurrentIdentity(w http.ResponseWriter, r *http.Request) {
+	if model.CurrentIdentity == nil {
+		w.WriteHeader(http.StatusUnauthorized)
+	} else {
+		w.Header().Add("Content-Type", "application/json")
+		result, _ := json.Marshal(model.CurrentIdentity)
+		w.Write(result)
+	}
 }
