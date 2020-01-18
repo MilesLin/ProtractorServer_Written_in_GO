@@ -15,6 +15,7 @@ func (lo login) registerRoutes() {
 
 	http.HandleFunc("/api/login", lo.login)
 	http.HandleFunc("/api/login/currentIdentity", lo.GetCurrentIdentity)
+	http.HandleFunc("/api/login/logout", lo.Logout)
 }
 
 func (lo login) login(w http.ResponseWriter, r *http.Request) {
@@ -66,4 +67,9 @@ func (lo login) GetCurrentIdentity(w http.ResponseWriter, r *http.Request) {
 		result, _ := json.Marshal(model.CurrentIdentity)
 		w.Write(result)
 	}
+}
+
+func (lo login) Logout(w http.ResponseWriter, r *http.Request) {
+	model.CurrentIdentity = nil
+	w.WriteHeader(http.StatusOK)
 }
