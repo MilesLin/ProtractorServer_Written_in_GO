@@ -7,7 +7,7 @@ type Event struct {
 	Time      string     `json:"time"`
 	Price     float32    `json:"price"`
 	Location  *Location  `json:"location"`
-	Session   *[]Session `json:"session"`
+	Session   *[]Session `json:"sessions"`
 	OnlineUrl string     `json:"onlineUrl"`
 	Image     string     `json:"image"`
 }

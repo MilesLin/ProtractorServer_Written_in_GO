@@ -79,7 +79,6 @@ func addEvent(w http.ResponseWriter, r *http.Request) {
 
 	base64String := base64.StdEncoding.EncodeToString(fileBytes)
 	resultImage := fmt.Sprintf("data:image/png;base64,%s", base64String)
-	fmt.Println(resultImage)
 	price, _ := strconv.ParseFloat(r.Form.Get("price"), 32)
 	resultEvent := model.Event{
 		Id:    getNextEventId(),
