@@ -53,22 +53,17 @@ func (lo login) login(w http.ResponseWriter, r *http.Request) {
 			w.WriteHeader(http.StatusUnauthorized)
 		} else {
 			model.CurrentIdentity = dbAct
-			w.Header().Add("Content-Type", "application/json")
 			result, _ := json.Marshal(dbAct)
 			w.Write(result)
 		}
 
-	} else {
-		http.NotFound(w, r)
 	}
-
 }
 
 func (lo login) GetCurrentIdentity(w http.ResponseWriter, r *http.Request) {
 	if model.CurrentIdentity == nil {
 		w.WriteHeader(http.StatusUnauthorized)
 	} else {
-		w.Header().Add("Content-Type", "application/json")
 		result, _ := json.Marshal(model.CurrentIdentity)
 		w.Write(result)
 	}
@@ -102,8 +97,6 @@ func (lo login) PutUser(w http.ResponseWriter, r *http.Request) {
 			http.NotFound(w, r)
 		}
 
-	} else {
-		http.NotFound(w, r)
 	}
 }
 
@@ -123,10 +116,7 @@ func (lo login) NewUser(w http.ResponseWriter, r *http.Request) {
 			body.Username,
 			body.Password,
 		})
-	} else {
-		http.NotFound(w, r)
 	}
-
 }
 
 func accountSort(i int, j int) bool {

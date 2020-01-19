@@ -22,8 +22,6 @@ func (e events) registerRoutes() {
 }
 
 func (e events) GetAndAddEvent(w http.ResponseWriter, r *http.Request) {
-	w.Header().Add("Content-Type", "application/json")
-
 	switch r.Method {
 	case http.MethodGet:
 		result, _ := json.Marshal(model.MyEvents)
@@ -35,7 +33,6 @@ func (e events) GetAndAddEvent(w http.ResponseWriter, r *http.Request) {
 }
 
 func (e events) GetAndPutEvent(w http.ResponseWriter, r *http.Request) {
-	w.Header().Add("Content-Type", "application/json")
 	idPattern, _ := regexp.Compile(`/api/events/(\d+)`)
 	matches := idPattern.FindStringSubmatch(r.URL.Path)
 
@@ -73,7 +70,7 @@ func (e events) Search(w http.ResponseWriter, r *http.Request) {
 	if err != nil {
 		fmt.Println(err)
 	}
-	w.Header().Add("Content-Type", "application/json")
+
 	keyword := r.Form.Get("search")
 	var sessions = []model.Session{}
 
