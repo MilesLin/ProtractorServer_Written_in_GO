@@ -19,6 +19,8 @@ func (e events) registerRoutes() {
 	http.HandleFunc("/api/events", e.GetAndAddEvent)
 	http.HandleFunc("/api/events/", e.GetAndPutEvent)
 	http.HandleFunc("/api/events/search", e.Search)
+	http.HandleFunc("/api/events/initialdata", e.Reset)
+
 }
 
 func (e events) GetAndAddEvent(w http.ResponseWriter, r *http.Request) {
@@ -85,6 +87,11 @@ func (e events) Search(w http.ResponseWriter, r *http.Request) {
 	result, _ := json.Marshal(sessions)
 	w.Write(result)
 
+}
+
+func (e events) Reset(w http.ResponseWriter, r *http.Request) {
+	model.MyEvents = model.ResetEvents
+	w.Write([]byte("資料初始化完畢"))
 }
 
 func addEvent(w http.ResponseWriter, r *http.Request) {
