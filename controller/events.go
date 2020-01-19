@@ -10,6 +10,7 @@ import (
 	"regexp"
 	"sort"
 	"strconv"
+	"strings"
 )
 
 type events struct{}
@@ -17,6 +18,7 @@ type events struct{}
 func (e events) registerRoutes() {
 	http.HandleFunc("/api/events", e.GetAndAddEvent)
 	http.HandleFunc("/api/events/", e.GetAndPutEvent)
+	http.HandleFunc("/api/events/search", e.Search)
 }
 
 func (e events) GetAndAddEvent(w http.ResponseWriter, r *http.Request) {
@@ -64,6 +66,28 @@ func (e events) GetAndPutEvent(w http.ResponseWriter, r *http.Request) {
 			}
 		}
 	}
+}
+
+func (e events) Search(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	if err != nil {
+		fmt.Println(err)
+	}
+	w.Header().Add("Content-Type", "application/json")
+	keyword := r.Form.Get("search")
+	var sessions = []model.Session{}
+
+	for _, event := range model.MyEvents {
+		for _, session := range *event.Session {
+			if n := strings.ToLower(session.Name); strings.Contains(n, strings.ToLower(keyword)) {
+				sessions = append(sessions, session)
+			}
+		}
+	}
+
+	result, _ := json.Marshal(sessions)
+	w.Write(result)
+
 }
 
 func addEvent(w http.ResponseWriter, r *http.Request) {
