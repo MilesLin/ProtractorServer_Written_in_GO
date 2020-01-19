@@ -15,11 +15,11 @@ import (
 type events struct{}
 
 func (e events) registerRoutes() {
-	http.HandleFunc("/api/events", e.GoEvent)
-	http.HandleFunc("/api/events/", e.GetAnEvent)
+	http.HandleFunc("/api/events", e.GetAndAddEvent)
+	http.HandleFunc("/api/events/", e.GetAndPutEvent)
 }
 
-func (e events) GoEvent(w http.ResponseWriter, r *http.Request) {
+func (e events) GetAndAddEvent(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
 
 	switch r.Method {
@@ -32,34 +32,37 @@ func (e events) GoEvent(w http.ResponseWriter, r *http.Request) {
 
 }
 
-func (e events) GetAnEvent(w http.ResponseWriter, r *http.Request) {
+func (e events) GetAndPutEvent(w http.ResponseWriter, r *http.Request) {
 	w.Header().Add("Content-Type", "application/json")
+	idPattern, _ := regexp.Compile(`/api/events/(\d+)`)
+	matches := idPattern.FindStringSubmatch(r.URL.Path)
+
+	if len(matches) < 1 {
+		http.NotFound(w, r)
+		return
+	}
+	id, _ := strconv.Atoi(matches[1])
 
 	if r.Method == http.MethodGet {
-		idPattern, _ := regexp.Compile(`/api/events/(\d+)`)
-		matches := idPattern.FindStringSubmatch(r.URL.Path)
-		if len(matches) > 0 {
-			id, _ := strconv.Atoi(matches[1])
 
-			var event *model.Event
-
-			for i := range model.MyEvents {
-				if model.MyEvents[i].Id == id {
-					event = &model.MyEvents[i]
-				}
-			}
-			w.WriteHeader(http.StatusOK)
-			if event != nil {
-				result, _ := json.Marshal(event)
+		for i := range model.MyEvents {
+			if model.MyEvents[i].Id == id {
+				result, _ := json.Marshal(&model.MyEvents[i])
 				w.Write(result)
+				return
 			}
-
-		} else {
-			http.NotFound(w, r)
 		}
 
-	} else {
-		http.NotFound(w, r)
+	} else if r.Method == http.MethodPut {
+		for i := range model.MyEvents {
+			if model.MyEvents[i].Id == id {
+				var eventBody model.Event
+				decoder := json.NewDecoder(r.Body)
+				decoder.Decode(&eventBody)
+				model.MyEvents[i].Session = eventBody.Session
+				return
+			}
+		}
 	}
 }
 
