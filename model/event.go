@@ -24,9 +24,9 @@ type Session struct {
 	Name      string   `json:"name"`
 	Presenter string   `json:"presenter"`
 	Duration  int      `json:"duration"`
-	Level1    bool    `json:"level1"`
-	Level2    bool    `json:"level2"`
-	Level3    bool    `json:"level3"`
+	Level1    bool     `json:"level1"`
+	Level2    bool     `json:"level2"`
+	Level3    bool     `json:"level3"`
 	Period    string   `json:"period"`
 	Abstract  string   `json:"abstract"`
 	Voters    []string `json:"voters"`
